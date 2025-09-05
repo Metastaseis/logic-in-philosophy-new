@@ -1,0 +1,5 @@
+[
+  { "name": "Prof. A. Scholar", "role": "Director", "affiliation": "TAU", "url": "#" },
+  { "name": "Dr. B. Researcher", "role": "Member", "affiliation": "TAU", "url": "#" },
+  { "name": "C. Student", "role": "Graduate Fellow", "affiliation": "TAU", "url": "#" }
+]

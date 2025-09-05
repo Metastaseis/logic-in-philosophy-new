@@ -1,0 +1,16 @@
+---
+const { lang = 'en' } = Astro.props;
+const langs = [
+  { code: 'en', label: 'EN', dir: 'ltr' },
+  { code: 'he', label: 'HE', dir: 'rtl' },
+  { code: 'ar', label: 'AR', dir: 'rtl' }
+];
+---
+<div class="text-sm">
+  {langs.map((l, i) => (
+    <>
+      <a href={'/' + l.code + '/'} class={l.code === lang ? 'font-semibold' : 'opacity-70 hover:opacity-100'}>{l.label}</a>
+      {i < langs.length - 1 ? <span class="mx-1">|</span> : null}
+    </>
+  ))}
+</div>

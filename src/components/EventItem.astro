@@ -1,0 +1,11 @@
+---
+const { title, start, end, location, children } = Astro.props;
+function fmt(dt) {
+  try { return new Date(dt).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }); } catch { return dt; }
+}
+---
+<article class="my-4">
+  <h3 class="text-lg font-semibold">{title}</h3>
+  <p class="opacity-80">Time and place: {fmt(start)}{end ? ` – ${fmt(end)}` : ''}{location ? `, ${location}` : ''}</p>
+  {children ? <div class="mt-2 prose">{children}</div> : null}
+</article>
