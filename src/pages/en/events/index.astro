@@ -5,6 +5,8 @@ const items = (await getCollection('events')).filter(e=>e.data.lang==='en').sort
 const now = Date.now();
 const upcoming = items.filter(e => new Date(e.data.start).getTime() >= now);
 const past = items.filter(e => new Date(e.data.start).getTime() < now);
+const base = import.meta.env.BASE_URL;
+return Astro.redirect(`${base}en/`);
 ---
 <BaseLayout title="Events — Logic in Philosophy" lang="en" dir="ltr">
   <h1>Events</h1>

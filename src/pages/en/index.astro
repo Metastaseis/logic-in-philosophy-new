@@ -1,14 +1,11 @@
 ---
-import "../styles.css";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Prose from "../../components/Prose.astro";
 ---
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Test with styles</title>
-  </head>
-  <body class="main-wrap container">
-    <h1>Layout test</h1>
-    <p>If you see this, styles load fine.</p>
-  </body>
-</html>
+<BaseLayout title="Logic in Philosophy" lang="en" dir="ltr">
+  <h1>Welcome to Logic in Philosophy</h1>
+  <Prose>
+    <p><strong>Logic in Philosophy</strong> is a research initiative at Tel Aviv University exploring logic, language, and conceptual engineering.</p>
+    <p>Use the navigation above to explore sections like <a href="/en/ruth-manor/">Ruth Manor Lecture Series</a> and <a href="/en/actah/">ACTAH</a>.</p>
+  </Prose>
+</BaseLayout>
