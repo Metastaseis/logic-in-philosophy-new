@@ -2,20 +2,23 @@
 import LangSwitcher from './LangSwitcher.astro';
 const { lang = 'en' } = Astro.props;
 
+// BASE_URL will be "/" locally, and "/<repo>/" on GitHub Pages
+const base = import.meta.env.BASE_URL;
+
 const nav = [
-  { href: `/${lang}/ruth-manor/`, label: { en: 'Ruth Manor', he: 'רות מנור', ar: 'روث مانور' } },
-  { href: `/${lang}/actah/`, label: { en: 'ACTAH', he: 'ACTAH', ar: 'ACTAH' } },
-  { href: `/${lang}/research-themes`, label: { en: 'Research Themes', he: 'נושאי מחקר', ar: 'محاور البحث' } },
-  { href: `/${lang}/news/`, label: { en: 'News', he: 'חדשות', ar: 'أخبار' } },
-  { href: `/${lang}/events/`, label: { en: 'Events', he: 'אירועים', ar: 'فعاليات' } },
-  { href: `/${lang}/people/`, label: { en: 'People', he: 'אנשים', ar: 'أشخاص' } },
-  { href: `/${lang}/publications`, label: { en: 'Publications', he: 'פרסומים', ar: 'منشورات' } },
-  { href: `/${lang}/impact`, label: { en: 'Impact', he: 'השפעה', ar: 'أثر' } },
-  { href: `/${lang}/teaching-guide`, label: { en: 'Teaching Guide', he: 'מדריך הוראה', ar: 'دليل التدريس' } }
+  { href: `${base}${lang}/ruth-manor/`, label: { en: 'Ruth Manor', he: 'רות מנור', ar: 'روث مانور' } },
+  { href: `${base}${lang}/actah/`, label: { en: 'ACTAH', he: 'ACTAH', ar: 'ACTAH' } },
+  { href: `${base}${lang}/research-themes`, label: { en: 'Research Themes', he: 'נושאי מחקר', ar: 'محاور البحث' } },
+  { href: `${base}${lang}/news/`, label: { en: 'News', he: 'חדשות', ar: 'أخبار' } },
+  { href: `${base}${lang}/events/`, label: { en: 'Events', he: 'אירועים', ar: 'فعاليات' } },
+  { href: `${base}${lang}/people/`, label: { en: 'People', he: 'אנשים', ar: 'أشخاص' } },
+  { href: `${base}${lang}/publications`, label: { en: 'Publications', he: 'פרסומים', ar: 'منشورات' } },
+  { href: `${base}${lang}/impact`, label: { en: 'Impact', he: 'השפעה', ar: 'أثر' } },
+  { href: `${base}${lang}/teaching-guide`, label: { en: 'Teaching Guide', he: 'מדריך הוראה', ar: 'دليل التدريس' } }
 ];
 ---
 <header class="container py-6 flex items-center justify-between gap-4">
-  <a href={'/' + lang + '/'} class="flex items-center gap-3">
+  <a href={`${base}${lang}/`} class="flex items-center gap-3">
     <img src="/logo.svg" alt="Logic in Philosophy" class="w-10 h-10" />
     <span class="text-2xl font-semibold">Logic in Philosophy</span>
   </a>
