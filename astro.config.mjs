@@ -2,8 +2,13 @@ import { defineConfig } from 'astro/config';
 import tailwind from '@astrojs/tailwind';
 import mdx from '@astrojs/mdx';
 
+const isCI = process.env.GITHUB_ACTIONS === 'true';
+const repo = process.env.GITHUB_REPOSITORY?.split('/')[1] ?? '';
+const base = isCI && repo ? `/${repo}/` : '/';
+
 export default defineConfig({
-  // site: 'https://logic-in-philosophy.sites.tau.ac.il', // set this when we point the TAU domain
+  base,
   integrations: [tailwind({ applyBaseStyles: false }), mdx()],
   scopedStyleStrategy: 'where'
+});
 });
