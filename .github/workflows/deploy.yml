@@ -18,19 +18,46 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      CI: true
+      # helpful if memory spikes during build
+      NODE_OPTIONS: --max_old_space_size=4096
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - uses: actions/setup-node@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      - run: npm ci || npm i
-      - run: npm run build
+      - name: Print env (debug)
+        run: |
+          echo "GITHUB_REPOSITORY=$GITHUB_REPOSITORY"
+          echo "GITHUB_ACTIONS=$GITHUB_ACTIONS"
+          node -v
+          npm -v
 
-      - uses: actions/configure-pages@v5
-      - uses: actions/upload-pages-artifact@v3
+      - name: Install deps
+        run: npm ci || npm i
+
+      - name: Show astro + vite versions (debug)
+        run: |
+          npx astro --version || true
+          npx vite --version || true
+
+      - name: Build
+        run: npm run build
+
+      - name: List dist (debug)
+        run: ls -la dist || true
+
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: dist
 
