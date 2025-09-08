@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Prose from "../../components/Prose.astro";
+---
+<BaseLayout title="נושאי מחקר" lang="he" dir="rtl">
+  <h1>נושאי מחקר</h1>
+  <Prose>
+    <p>תוכן יתפרסם בקרוב.</p>
+  </Prose>
+</BaseLayout>
