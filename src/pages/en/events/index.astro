@@ -1,37 +1,17 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro";
-import { getCollection } from 'astro:content';
-const items = (await getCollection('events')).filter(e=>e.data.lang==='en').sort((a,b)=> (a.data.start>b.data.start?1:-1));
-const now = Date.now();
-const upcoming = items.filter(e => new Date(e.data.start).getTime() >= now);
-const past = items.filter(e => new Date(e.data.start).getTime() < now);
-const base = import.meta.env.BASE_URL;
-return Astro.redirect(`${base}en/`);
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Prose from "@/components/Prose.astro";
+import ZoomEmbed from "@/components/ZoomEmbed.astro";
+import Youtube from "@/components/Youtube.astro";
 ---
 <BaseLayout title="Events — Logic in Philosophy" lang="en" dir="ltr">
   <h1>Events</h1>
-  <p>Subscribe: <a href="#">Email list</a> · <a href="#">Google Calendar</a></p>
+  <Prose>
+    <p>Join the event below (embedded Zoom):</p>
+    <!-- Replace with your real Zoom EMBED URL when available -->
+    <ZoomEmbed src="https://YOUR-ZOOM-EMBED-URL" title="Live Zoom Session" />
 
-  <h2 class="mt-8">Upcoming</h2>
-  {upcoming.length ? upcoming.map(e => (
-    <article class="my-4">
-      <h3 class="text-lg font-semibold">{e.data.title}</h3>
-      <p class="opacity-80">
-        {new Date(e.data.start).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' })}
-        {e.data.end ? ' – ' + new Date(e.data.end).toLocaleString(undefined, { dateStyle: 'medium', timeStyle: 'short' }) : ''}
-        {e.data.location ? ', ' + e.data.location : ''}
-      </p>
-    </article>
-  )) : <p>No upcoming events yet.</p>}
-
-  <h2 class="mt-8">Past talks</h2>
-  {past.length ? past.map(e => (
-    <article class="my-4">
-      <h3 class="text-lg font-semibold">{e.data.title}</h3>
-      <p class="opacity-80">
-        {new Date(e.data.start).toLocaleDateString()}
-        {e.data.location ? ', ' + e.data.location : ''}
-      </p>
-    </article>
-  )) : <p>No past events yet.</p>}
+    <h2>Recent Recording</h2>
+    <Youtube id="dQw4w9WgXcQ" title="Sample Lecture" />
+  </Prose>
 </BaseLayout>

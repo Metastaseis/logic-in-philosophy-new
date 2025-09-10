@@ -1,11 +1,10 @@
 ---
-import BaseLayout from "../../../layouts/BaseLayout.astro";
-const core = (await import('../../../content/people/core.json')).default;
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Prose from "@/components/Prose.astro";
 ---
 <BaseLayout title="People — Logic in Philosophy" lang="en" dir="ltr">
   <h1>People</h1>
-  <h2 class="mt-6">Core participants</h2>
-  <ul class="list-disc ps-6">
-    {core.map(p => <li><a href={p.url}>{p.name}</a> — {p.role}, {p.affiliation}</li>)}
-  </ul>
+  <Prose>
+    <p>Team and collaborators list coming soon.</p>
+  </Prose>
 </BaseLayout>

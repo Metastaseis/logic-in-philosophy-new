@@ -18,16 +18,21 @@ const nav = [
 ];
 ---
 <header class="container py-6 flex flex-wrap items-center justify-between gap-4">
+  <!-- Left: logo + title; shrink so it never overlaps the nav -->
   <a href={`${base}${lang}/`} class="flex items-center gap-3 shrink-0">
     <img src="/logo.svg" alt="Logic in Philosophy" class="w-10 h-10" />
     <span class="text-2xl font-semibold">Logic in Philosophy</span>
   </a>
+
+  <!-- Right: desktop nav -->
   <nav class="hidden md:flex gap-5">
     {nav.map((item) => (
       <a href={item.href} class="hover:underline">{item.label[lang]}</a>
     ))}
   </nav>
-  <div class="flex items-center gap-3">
+
+  <!-- Utilities: language + mobile menu -->
+  <div class="flex items-center gap-3 ms-auto md:ms-0">
     <LangSwitcher lang={lang} />
     <details class="md:hidden">
       <summary class="cursor-pointer px-3 py-2 border rounded">Menu</summary>

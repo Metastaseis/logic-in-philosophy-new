@@ -1,0 +1,19 @@
+---
+/**
+ * Props:
+ * - src: full iframe src (YouTube, Zoom, Vimeo, etc.)
+ * - title: accessible title for the iframe
+ * - ratio: optional, default "16/9"
+ */
+const { src, title = 'Embedded media', ratio = '16/9' } = Astro.props;
+---
+<div class="relative w-full" style={`aspect-ratio:${ratio}`}>
+  <iframe
+    src={src}
+    title={title}
+    class="absolute inset-0 w-full h-full"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    loading="lazy"
+  ></iframe>
+</div>

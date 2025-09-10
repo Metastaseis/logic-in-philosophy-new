@@ -1,19 +1,20 @@
 ---
 /**
- * ZoomEmbed.astro
+ * Youtube.astro
  * Props:
- * - src: embeddable Zoom iframe URL (⚠️ not a plain join link)
+ * - id: YouTube video ID (e.g., "dQw4w9WgXcQ")
  * - title: accessible title for the iframe
  * - ratio: aspect ratio (default "16/9")
  */
-const { src, title = "Zoom meeting", ratio = "16/9" } = Astro.props;
+const { id, title = "YouTube video", ratio = "16/9" } = Astro.props;
+const src = `https://www.youtube.com/embed/${id}`;
 ---
 <div class="relative w-full" style={`aspect-ratio:${ratio}`}>
   <iframe
     src={src}
     title={title}
     class="absolute inset-0 w-full h-full"
-    allow="microphone; camera; fullscreen; display-capture"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
     allowfullscreen
     loading="lazy"
   ></iframe>
