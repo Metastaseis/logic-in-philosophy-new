@@ -1,8 +1,6 @@
 ---
 import LangSwitcher from './LangSwitcher.astro';
 const { lang = 'en' } = Astro.props;
-
-// BASE_URL will be "/" locally, and "/<repo>/" on GitHub Pages
 const base = import.meta.env.BASE_URL;
 
 const nav = [
@@ -20,7 +18,7 @@ const nav = [
 <header class="container py-6 flex flex-wrap items-center justify-between gap-4">
   <!-- Left: logo + title; shrink so it never overlaps the nav -->
   <a href={`${base}${lang}/`} class="flex items-center gap-3 shrink-0">
-    <img src="/logo.svg" alt="Logic in Philosophy" class="w-10 h-10" />
+    <img src={`${base}logo.jpg?v=1`} alt="Logic in Philosophy" class="w-10 h-10" />
     <span class="text-2xl font-semibold">Logic in Philosophy</span>
   </a>
 
