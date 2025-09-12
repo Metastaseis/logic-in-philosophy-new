@@ -1,22 +1,24 @@
 ---
-const { title = 'Logic in Philosophy', lang = 'en', dir = 'ltr' } = Astro.props;
-// Use a RELATIVE import (one level up from /src/layouts to /src/styles.css)
-import "../styles.css";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import "@/styles.css"; // ✅ Import CSS via ESM so Tailwind is processed
+
+const { title = "Logic in Philosophy", lang = "en", dir = "ltr" } = Astro.props;
+const base = import.meta.env.BASE_URL;
 ---
 <!DOCTYPE html>
 <html lang={lang} dir={dir}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" href="/logo.svg" type="image/svg+xml" />
     <title>{title}</title>
+
+    <!-- Favicon (using site logo for now) -->
+    <link rel="icon" href={`${base}logo.jpg`} type="image/jpeg" />
   </head>
-  <body>
-    <a class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:start-2 bg-yellow-200 p-2" href="#content">Skip to content</a>
-    <Header lang={lang} dir={dir} />
-    <main id="content" class="main-wrap container">
+  <body class="flex flex-col min-h-screen">
+    <Header lang={lang} />
+    <main id="main" class="flex-1 container py-8">
       <slot />
     </main>
     <Footer />
