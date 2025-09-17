@@ -1,0 +1,16 @@
+---
+/**
+ * Props:
+ * - items: Array<{author, title, year, venue?, url?, note?}>
+ */
+const { items = [] } = Astro.props;
+---
+<ol class="prose list-decimal ps-6">
+  {items.map((it) => (
+    <li>
+      <span>{it.author}. <strong>{it.title}</strong> ({it.year}){it.venue ? `, ${it.venue}` : ''}.</span>
+      {it.note ? <> <em>({it.note})</em></> : null}
+      {it.url ? <> — <a href={it.url} target="_blank" rel="noopener">Link</a></> : null}
+    </li>
+  ))}
+</ol>

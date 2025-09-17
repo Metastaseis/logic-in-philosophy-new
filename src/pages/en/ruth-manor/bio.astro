@@ -1,19 +1,26 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Prose from "@/components/Prose.astro";
+import BibliographyList from "@/components/BibliographyList.astro";
+import PhotoGrid from "@/components/PhotoGrid.astro";
+
+import enBio from "@/content/ruth-manor/bio/en.md";
+import biblio from "@/content/ruth-manor/bibliography.json";
+
+const photos = [
+  "ruth-manor/photos/sample1.jpg",
+  "ruth-manor/photos/sample2.jpg"
+];
 ---
 <BaseLayout title="Ruth Manor — Biography & Bibliography" lang="en" dir="ltr">
   <h1>Ruth Manor — Biography & Bibliography</h1>
   <Prose>
-    <h2>Biography</h2>
-    <p>Short bio here…</p>
-    <h2>Selected Bibliography</h2>
-    <ul>
-      <li>Author, Title, Year.</li>
-    </ul>
-    <h2>Photos</h2>
-    <p>Add images to <code>/public/ruth-manor/</code> and reference them here.</p>
-    <h2>Personal comments</h2>
-    <p>Memories, notes, and tributes.</p>
+    <enBio.Content />
   </Prose>
+
+  <h2 class="mt-10 mb-4 text-xl font-semibold">Photos</h2>
+  <PhotoGrid paths={photos} />
+
+  <h2 class="mt-10 mb-4 text-xl font-semibold">Selected Bibliography</h2>
+  <BibliographyList items={biblio} />
 </BaseLayout>

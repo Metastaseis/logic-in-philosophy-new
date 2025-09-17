@@ -1,0 +1,47 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Prose from "@/components/Prose.astro";
+import PhotoGrid from "@/components/PhotoGrid.astro";
+import { getCollection, getEntry } from "astro:content";
+
+// Get slug param
+const { slug } = Astro.params;
+
+// Get lecture entry
+const entry = await getEntry("ruthLectures", slug);
+if (!entry) {
+  throw new Error(`Lecture not found for slug: ${slug}`);
+}
+
+const data = entry.data;
+const Content = entry.render ? (await entry.render()).Content : null;
+---
+<BaseLayout title={`${data.title} — Ruth Manor`} lang="en" dir="ltr">
+  <h1>{data.title}</h1>
+  <Prose>
+    <p>
+      <strong>Date:</strong> <time datetime={data.date}>{data.date}</time><br />
+      {data.speakers.length ? <><strong>Speakers:</strong> {data.speakers.join(", ")}<br /></> : null}
+      {data.note ? <><strong>Note:</strong> {data.note}<br /></> : null}
+      {data.materials.length
+        ? <>
+            <strong>Materials:</strong>
+            <ul>
+              {data.materials.map((m) => (
+                <li><a href={m.url} target="_blank" rel="noopener">{m.label}</a></li>
+              ))}
+            </ul>
+          </>
+        : null}
+    </p>
+
+    {Content ? <Content /> : null}
+  </Prose>
+
+  {data.photos.length
+    ? <>
+        <h2 class="mt-10 mb-4 text-xl font-semibold">Photos</h2>
+        <PhotoGrid paths={data.photos} />
+      </>
+    : null}
+</BaseLayout>

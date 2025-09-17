@@ -1,13 +1,23 @@
 ---
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Prose from "@/components/Prose.astro";
+import { getCollection } from "astro:content";
+
+const items = (await getCollection("ruthLectures", ({ data }) => data.lang === "en"))
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
 ---
 <BaseLayout title="Guest Lectures — Ruth Manor" lang="en" dir="ltr">
   <h1>Guest Lectures</h1>
   <Prose>
-    <p>List guest lectures here. You can keep everything on this page or create sub-pages per lecture later.</p>
     <ul>
-      <li>Prof. X — “Title”, Date — <a href="#">materials</a> · <a href="#">photos</a></li>
+      {items.map((e) => (
+        <li>
+          <a href={`/en/ruth-manor/guest-lectures/${e.slug}/`} class="underline">{e.data.title}</a>
+          {" — "}
+          <time datetime={e.data.date}>{e.data.date}</time>
+          {e.data.speakers.length > 0 ? ` — ${e.data.speakers.join(", ")}` : null}
+        </li>
+      ))}
     </ul>
   </Prose>
 </BaseLayout>

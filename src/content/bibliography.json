@@ -1,0 +1,16 @@
+[
+  {
+    "author": "Manor, Ruth",
+    "title": "Sample Article Title",
+    "year": 1998,
+    "venue": "Journal of Logic",
+    "url": "https://example.com/paper"
+  },
+  {
+    "author": "Manor, Ruth",
+    "title": "Another Work",
+    "year": 2005,
+    "venue": "Edited Volume",
+    "note": "Reprinted 2010"
+  }
+]
