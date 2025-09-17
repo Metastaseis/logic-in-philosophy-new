@@ -1,0 +1,42 @@
+---
+/**
+ * Drop-in meta component for consistent SEO/OG tags.
+ * Props:
+ * - title (required): string
+ * - description: string
+ * - url: absolute canonical URL (optional; safe to omit until you get the TAU domain)
+ * - image: absolute URL to social share image (optional)
+ * - lang: "en" | "he" | "ar" (used for og:locale when possible)
+ */
+const {
+  title = "Logic in Philosophy",
+  description = "Logic in Philosophy at Tel Aviv University – research, teaching, events.",
+  url,
+  image,
+  lang = "en",
+} = Astro.props;
+
+const base = import.meta.env.BASE_URL;
+const ogLocale =
+  lang === "he" ? "he_IL" :
+  lang === "ar" ? "ar_AR" : "en_US";
+---
+<title>{title}</title>
+<meta name="description" content={description} />
+
+<!-- Canonical (optional if you don't have a final domain yet) -->
+{url && <link rel="canonical" href={url} />}
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+{url && <meta property="og:url" content={url} />}
+{image && <meta property="og:image" content={image} />}
+<meta property="og:locale" content={ogLocale} />
+
+<!-- Twitter -->
+<meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+{image && <meta name="twitter:image" content={image} />}

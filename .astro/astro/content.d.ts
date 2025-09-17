@@ -178,6 +178,15 @@ declare module 'astro:content' {
   data: InferEntrySchema<"pages">
 } & { render(): Render[".md"] };
 };
+"ruth-manor": {
+"about/en.md": {
+	id: "about/en.md";
+  slug: "about/en";
+  body: string;
+  collection: "ruth-manor";
+  data: any
+} & { render(): Render[".md"] };
+};
 
 	};
 
