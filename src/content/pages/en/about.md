@@ -1,15 +1,9 @@
 ---
-import { getEntry } from "astro:content";
-
-// collection key: "ruthmanor"  (from config.ts)
-// slug (filename without extension): "about-en"
-const entry = await getEntry("ruthmanor", "about-en");
-if (!entry) {
-  throw new Error("Missing content: src/content/ruthmanor/about-en.md");
-}
-
-const { Content } = await entry.render();
+title: "About"
+lang: "en"
+# collection key: "ruthmanor" (from config.ts)
 ---
+Write the English “About” content here in Markdown.
 
 <html lang="en">
   <head>
