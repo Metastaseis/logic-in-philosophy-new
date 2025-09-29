@@ -157,7 +157,16 @@ declare module 'astro:content' {
   slug: "en/2025-10-01-launch-colloquium";
   body: string;
   collection: "events";
-  data: InferEntrySchema<"events">
+  data: any
+} & { render(): Render[".md"] };
+};
+"lectures": {
+"en/2025-01-20-sample-talk.md": {
+	id: "en/2025-01-20-sample-talk.md";
+  slug: "en/2025-01-20-sample-talk";
+  body: string;
+  collection: "lectures";
+  data: any
 } & { render(): Render[".md"] };
 };
 "news": {
@@ -166,7 +175,7 @@ declare module 'astro:content' {
   slug: "en/2025-09-03-welcome";
   body: string;
   collection: "news";
-  data: InferEntrySchema<"news">
+  data: any
 } & { render(): Render[".md"] };
 };
 "pages": {
@@ -175,15 +184,36 @@ declare module 'astro:content' {
   slug: "en/about";
   body: string;
   collection: "pages";
-  data: InferEntrySchema<"pages">
+  data: any
 } & { render(): Render[".md"] };
 };
-"ruth-manor": {
+"ruthmanor": {
 "about/en.md": {
 	id: "about/en.md";
   slug: "about/en";
   body: string;
-  collection: "ruth-manor";
+  collection: "ruthmanor";
+  data: any
+} & { render(): Render[".md"] };
+"bio/ar.md": {
+	id: "bio/ar.md";
+  slug: "bio/ar";
+  body: string;
+  collection: "ruthmanor";
+  data: any
+} & { render(): Render[".md"] };
+"bio/en.md": {
+	id: "bio/en.md";
+  slug: "bio/en";
+  body: string;
+  collection: "ruthmanor";
+  data: any
+} & { render(): Render[".md"] };
+"bio/he.md": {
+	id: "bio/he.md";
+  slug: "bio/he";
+  body: string;
+  collection: "ruthmanor";
   data: any
 } & { render(): Render[".md"] };
 };
@@ -191,7 +221,14 @@ declare module 'astro:content' {
 	};
 
 	type DataEntryMap = {
-		"people": {
+		"bibliography": {
+"bibliography": {
+	id: "bibliography";
+  collection: "bibliography";
+  data: any
+};
+};
+"people": {
 "core": {
 	id: "core";
   collection: "people";
@@ -203,5 +240,5 @@ declare module 'astro:content' {
 
 	type AnyEntryMap = ContentEntryMap & DataEntryMap;
 
-	export type ContentConfig = typeof import("../../src/content/config.js");
+	export type ContentConfig = never;
 }

@@ -1,0 +1,16 @@
+---
+import { getCollection } from "astro:content";
+
+// 1. Load everything from the "bibliography" collection
+const entries = await getCollection("bibliography");
+
+// 2. If you only have one file, just grab the first
+const bib = entries[0].data;
+---
+
+<html>
+  <body>
+    <h1>Bibliography</h1>
+    <pre>{JSON.stringify(bib, null, 2)}</pre>
+  </body>
+</html>

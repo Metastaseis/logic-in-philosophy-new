@@ -1,9 +1,4 @@
 ---
-/**
- * Props:
- * - paths: string[]    // e.g., ["ruth-manor/photos/sample1.jpg", ...]
- * - baseAware: boolean // default true; prepends BASE_URL if true
- */
 const { paths = [], baseAware = true } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const urlFor = (p: string) => (baseAware ? `${base}${p}` : p);

@@ -2,28 +2,28 @@
 import BaseLayout from "@/layouts/BaseLayout.astro";
 import Prose from "@/components/Prose.astro";
 import PhotoGrid from "@/components/PhotoGrid.astro";
-import { getCollection, getEntry } from "astro:content";
+import { getCollection } from "astro:content";
 
-// Get slug param
-const { slug } = Astro.params;
+const { slug } = Astro.params; // e.g. "2025-01-20-sample-talk"
 
-// Get lecture entry
-const entry = await getEntry("ruthLectures", slug);
+// Find the EN lecture whose slug ends with this segment
+const allEn = await getCollection("ruthLectures", ({ data }) => data.lang === "en");
+const entry = allEn.find((e) => e.slug.split("/").pop() === slug);
 if (!entry) {
   throw new Error(`Lecture not found for slug: ${slug}`);
 }
 
 const data = entry.data;
-const Content = entry.render ? (await entry.render()).Content : null;
+const { Content } = await entry.render();
 ---
 <BaseLayout title={`${data.title} — Ruth Manor`} lang="en" dir="ltr">
   <h1>{data.title}</h1>
   <Prose>
     <p>
       <strong>Date:</strong> <time datetime={data.date}>{data.date}</time><br />
-      {data.speakers.length ? <><strong>Speakers:</strong> {data.speakers.join(", ")}<br /></> : null}
+      {data.speakers?.length ? <><strong>Speakers:</strong> {data.speakers.join(", ")}<br /></> : null}
       {data.note ? <><strong>Note:</strong> {data.note}<br /></> : null}
-      {data.materials.length
+      {data.materials?.length
         ? <>
             <strong>Materials:</strong>
             <ul>
@@ -38,7 +38,7 @@ const Content = entry.render ? (await entry.render()).Content : null;
     {Content ? <Content /> : null}
   </Prose>
 
-  {data.photos.length
+  {data.photos?.length
     ? <>
         <h2 class="mt-10 mb-4 text-xl font-semibold">Photos</h2>
         <PhotoGrid paths={data.photos} />

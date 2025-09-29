@@ -1,0 +1,29 @@
+---
+import BaseLayout from "@/layouts/BaseLayout.astro";
+import Prose from "@/components/Prose.astro";
+import { getCollection } from "astro:content";
+
+const items = (await getCollection("ruthLectures", ({ data }) => data.lang === "en"))
+  .sort((a, b) => (a.data.date < b.data.date ? 1 : -1));
+
+const base = import.meta.env.BASE_URL;
+// Astro's slug here is "en/2025-01-20-sample-talk". We want only the last part for our URL.
+const slugTail = (slug: string) => slug.split("/").pop();
+---
+<BaseLayout title="Guest Lectures — Ruth Manor" lang="en" dir="ltr">
+  <h1>Guest Lectures</h1>
+  <Prose>
+    <ul>
+      {items.map((e) => (
+        <li>
+          <a href={`${base}en/ruth-manor/guest-lectures/${slugTail(e.slug)}/`} class="underline">
+            {e.data.title}
+          </a>
+          {" — "}
+          <time datetime={e.data.date}>{e.data.date}</time>
+          {e.data.speakers?.length ? ` — ${e.data.speakers.join(", ")}` : null}
+        </li>
+      ))}
+    </ul>
+  </Prose>
+</BaseLayout>

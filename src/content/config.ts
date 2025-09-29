@@ -1,37 +1,26 @@
-import { defineCollection, z } from 'astro:content';
+import { defineCollection, z } from "astro:content";
 
+// (Keep your existing news/events if you have them.)
 const news = defineCollection({
-  type: 'content',
   schema: z.object({
     title: z.string(),
     date: z.string(),
-    summary: z.string().optional(),
-    lang: z.enum(['en','he','ar']).default('en'),
+    lang: z.enum(["en", "he", "ar"]).default("en"),
     excerpt: z.string().optional(),
-  })
+  }),
 });
 
 const events = defineCollection({
-  type: 'content',
   schema: z.object({
     title: z.string(),
-    start: z.string(),
-    end: z.string().optional(),
+    date: z.string(),
+    lang: z.enum(["en", "he", "ar"]).default("en"),
     location: z.string().optional(),
-    links: z.array(z.object({ label: z.string(), href: z.string() })).optional(),
-    lang: z.enum(['en','he','ar']).default('en'),
-    url: z.string().optional()
-  })
+    url: z.string().optional(),
+  }),
 });
 
-const pages = defineCollection({
-  type: 'content',
-  schema: z.object({
-    title: z.string(),
-    lang: z.enum(['en','he','ar']).default('en')
-  })
-});
-
+// Ruth Manor — Guest Lectures
 const ruthLectures = defineCollection({
   type: "content",
   schema: z.object({
@@ -40,16 +29,9 @@ const ruthLectures = defineCollection({
     lang: z.enum(["en", "he", "ar"]).default("en"),
     speakers: z.array(z.string()).default([]),
     note: z.string().optional(),
-    materials: z
-      .array(
-        z.object({
-          label: z.string(),
-          url: z.string(),
-        })
-      )
-      .default([]),
-    photos: z.array(z.string()).default([]), // filenames under public/ruth-manor/photos/
+    materials: z.array(z.object({ label: z.string(), url: z.string() })).default([]),
+    photos: z.array(z.string()).default([]), // paths under public/
   }),
 });
 
-export const collections = { news, events, pages };
+export const collections = { news, events, ruthLectures };
