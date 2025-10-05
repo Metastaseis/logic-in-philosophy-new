@@ -233,7 +233,7 @@ declare module 'astro:content' {
 "bibliography": {
 	id: "bibliography";
   collection: "bibliography";
-  data: any
+  data: InferEntrySchema<"bibliography">
 };
 };
 "people": {

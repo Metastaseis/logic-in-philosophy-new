@@ -1,8 +1,8 @@
 ---
 title: "Launch Colloquium"
-start: "2025-10-01T17:00:00+03:00"
-end: "2025-10-01T19:00:00+03:00"
-location: "Gilman Building, Room 496"
-lang: en
+date: "2025-10-01"
+lang: "en"
+location: "Tel Aviv University"
+url: "https://example.com/register"
 ---
-Short talks and a discussion on conceptual engineering and logic.
+Details about the launch colloquium. You can add agenda, speakers, etc.
