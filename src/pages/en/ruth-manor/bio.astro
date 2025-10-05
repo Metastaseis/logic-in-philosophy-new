@@ -3,14 +3,13 @@ import BaseLayout from "@/layouts/BaseLayout.astro";
 import Prose from "@/components/Prose.astro";
 import BibliographyList from "@/components/BibliographyList.astro";
 import PhotoGrid from "@/components/PhotoGrid.astro";
-
 import EnBio from "@/content/ruth-manor/bio/en.md";
-import biblio from "@/content/ruth-manor/bibliography.json";
 
-const photos = [
-  "ruth-manor/ruth-manor1.jpg",
-  "ruth-manor/ruth-manor2.jpg"
-];
+import { getEntry } from "astro:content";
+const { data: biblio } = await getEntry("bibliography", "bibliography"); 
+// file: src/content/bibliography/bibliography.json  -> id "bibliography"
+
+const photos = ["ruth-manor/ruth-manor1.jpg", "ruth-manor/ruth-manor2.jpg"];
 ---
 <BaseLayout title="Ruth Manor — Biography & Bibliography" lang="en" dir="ltr">
   <h1>Ruth Manor — Biography & Bibliography</h1>
