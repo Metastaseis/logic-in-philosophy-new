@@ -4,19 +4,25 @@ import Prose from "@/components/Prose.astro";
 import PhotoGrid from "@/components/PhotoGrid.astro";
 import { getCollection } from "astro:content";
 
-const { slug } = Astro.params; // e.g. "2025-01-20-sample-talk"
-
-// Find the EN lecture whose slug ends with this segment
-const allEn = await getCollection("ruthLectures", ({ data }) => data.lang === "en");
-const entry = allEn.find((e) => e.slug.split("/").pop() === slug);
-if (!entry) {
-  throw new Error(`Lecture not found for slug: ${slug}`);
+/** Build-time: enumerate all lecture pages for EN */
+export async function getStaticPaths() {
+  const allEn = await getCollection("ruthLectures", ({ data }) => data.lang === "en");
+  return allEn.map((entry) => {
+    // entry.slug looks like "en/2025-01-20-sample-talk"
+    const slug = entry.slug.split("/").pop();
+    return {
+      params: { slug },       // becomes /en/ruth-manor/guest-lectures/<slug>/
+      props: { entry },       // pass the entry to the page
+    };
+  });
 }
 
+// Props from getStaticPaths()
+const { entry } = Astro.props;
 const data = entry.data;
 const { Content } = await entry.render();
 ---
-<BaseLayout title={`${data.title} — ruth-manor`} lang="en" dir="ltr">
+<BaseLayout title={`${data.title} — Ruth Manor`} lang="en" dir="ltr">
   <h1>{data.title}</h1>
   <Prose>
     <p>
